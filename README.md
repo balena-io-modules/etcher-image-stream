@@ -20,9 +20,9 @@ $ npm install --save etcher-image-stream
 Documentation
 -------------
 
-<a name="module_EtcherImageStream.getFromFilePath"></a>
+<a name="module_imageStream.getFromFilePath"></a>
 
-### EtcherImageStream.getFromFilePath(file) ⇒ <code>Promise</code>
+### imageStream.getFromFilePath(file) ⇒ <code>Promise</code>
 This function resolves an object containing the following properties:
 
 - `Number size`: The input file size.
@@ -39,7 +39,7 @@ showing a progress bar when you can't know the final uncompressed size.
 In such case, you can pipe the `stream` through a progress stream using
 the input file `size`, and apply the `transform` after the progress stream.
 
-**Kind**: static method of <code>[EtcherImageStream](#module_EtcherImageStream)</code>  
+**Kind**: static method of <code>[imageStream](#module_imageStream)</code>  
 **Summary**: Get an image stream from a file  
 **Access:** public  
 **Fulfil**: <code>Object</code> - image stream details  
