@@ -3,10 +3,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v1.1.0] - 2016-04-27
+
+### Added
+
+- Export supported file types as `.supportedFileTypes`.
+
 ## [v1.0.1] - 2016-04-27
 
 ### Changed
 
 - Don't ignore `lib/` in NPM package.
 
+[v1.1.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v1.0.1...v1.1.0
 [v1.0.1]: https://github.com/resin-io-modules/etcher-image-stream/compare/v1.0.0...v1.0.1
