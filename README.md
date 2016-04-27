@@ -20,6 +20,25 @@ $ npm install --save etcher-image-stream
 Documentation
 -------------
 
+
+* [imageStream](#module_imageStream)
+    * [.supportedFileTypes](#module_imageStream.supportedFileTypes) : <code>Array.&lt;String&gt;</code>
+    * [.getFromFilePath(file)](#module_imageStream.getFromFilePath) ⇒ <code>Promise</code>
+
+<a name="module_imageStream.supportedFileTypes"></a>
+
+### imageStream.supportedFileTypes : <code>Array.&lt;String&gt;</code>
+**Kind**: static property of <code>[imageStream](#module_imageStream)</code>  
+**Summary**: Supported file types  
+**Access:** public  
+**Example**  
+```js
+const imageStream = require('etcher-image-stream');
+
+imageStream.supportedFileTypes.forEach(function(fileType) {
+  console.log('Supported file type: ' + fileType);
+});
+```
 <a name="module_imageStream.getFromFilePath"></a>
 
 ### imageStream.getFromFilePath(file) ⇒ <code>Promise</code>
