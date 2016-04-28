@@ -42,12 +42,24 @@ function deleteIfExists(file) {
   });
 }
 
+exports.expectError = function(file, errorMessage) {
+  it('should be rejected with an error', function() {
+    const promise = imageStream.getFromFilePath(file);
+    m.chai.expect(promise).to.be.rejectedWith(errorMessage);
+  });
+};
+
 exports.extractFromFilePath = function(file, image) {
   it('should be able to extract the image', function(done) {
     const output = tmp.tmpNameSync();
 
     imageStream.getFromFilePath(file).then(function(results) {
-      m.chai.expect(results.size).to.equal(fs.statSync(file).size);
+      if (!_.some([
+        results.size === fs.statSync(file).size,
+        results.size === fs.statSync(image).size
+      ])) {
+        throw new Error('Invalid size: ' + results.size);
+      }
 
       const stream = results.stream
         .pipe(results.transform)
