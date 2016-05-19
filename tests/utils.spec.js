@@ -25,6 +25,11 @@ describe('Utils', function() {
 
   describe('.getArchiveMimeType()', function() {
 
+    it('should return application/x-bzip2 for a bz2 archive', function() {
+      const file = path.join(DATA_PATH, 'bz2', 'raspberrypi.img.bz2');
+      m.chai.expect(utils.getArchiveMimeType(file)).to.equal('application/x-bzip2');
+    });
+
     it('should return application/x-xz for a xz archive', function() {
       const file = path.join(DATA_PATH, 'xz', 'raspberrypi.img.xz');
       m.chai.expect(utils.getArchiveMimeType(file)).to.equal('application/x-xz');
