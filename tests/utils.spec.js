@@ -30,6 +30,11 @@ describe('Utils', function() {
       m.chai.expect(utils.getArchiveMimeType(file)).to.equal('application/x-xz');
     });
 
+    it('should return application/gzip for a gz archive', function() {
+      const file = path.join(DATA_PATH, 'gz', 'raspberrypi.img.gz');
+      m.chai.expect(utils.getArchiveMimeType(file)).to.equal('application/gzip');
+    });
+
     it('should return application/zip for a zip archive', function() {
       const file = path.join(DATA_PATH, 'zip', 'zip-directory-rpi-only.zip');
       m.chai.expect(utils.getArchiveMimeType(file)).to.equal('application/zip');
