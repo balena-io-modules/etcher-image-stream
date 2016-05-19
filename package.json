@@ -41,6 +41,7 @@
     "lodash": "^4.11.1",
     "lzma-native": "^1.1.0",
     "read-chunk": "^2.0.0",
-    "resin-zip-image": "^1.1.2"
+    "resin-zip-image": "^1.1.2",
+    "unbzip2-stream": "^1.0.9"
   }
 }
