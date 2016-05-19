@@ -36,7 +36,7 @@ Documentation
 const imageStream = require('etcher-image-stream');
 
 imageStream.supportedFileTypes.forEach(function(fileType) {
-  console.log('Supported file type: ' + fileType);
+  console.log('Supported file type: ' + fileType.extension);
 });
 ```
 <a name="module_imageStream.getFromFilePath"></a>

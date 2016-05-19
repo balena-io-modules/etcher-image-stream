@@ -33,18 +33,20 @@ describe('EtcherImageStream', function() {
     });
 
     it('should contain only strings', function() {
-      m.chai.expect(_.every(_.map(imageStream.supportedFileTypes, _.isString))).to.be.true;
+      m.chai.expect(_.every(_.map(imageStream.supportedFileTypes, function(fileType) {
+        return _.isString(fileType.extension) && _.isString(fileType.type);
+      }))).to.be.true;
     });
 
     it('should not contain empty strings', function() {
       m.chai.expect(_.every(_.map(imageStream.supportedFileTypes, function(fileType) {
-        return !_.isEmpty(fileType);
+        return !_.isEmpty(fileType.extension) && !_.isEmpty(fileType.type);
       }))).to.be.true;
     });
 
-    it('should not contain a leading period in any file type', function() {
+    it('should not contain a leading period in any file type extension', function() {
       m.chai.expect(_.every(_.map(imageStream.supportedFileTypes, function(fileType) {
-        return _.first(fileType) !== '.';
+        return _.first(fileType.extension) !== '.';
       }))).to.be.true;
     });
 
