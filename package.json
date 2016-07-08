@@ -12,7 +12,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "npm run lint && mocha --recursive tests/*.spec.js -R spec",
+    "test": "npm run lint && mocha --recursive tests -R spec",
     "lint": "jshint --config .jshintrc --reporter=node_modules/jshint-stylish lib tests",
     "readme": "jsdoc2md --template doc/README.hbs lib/index.js > README.md"
   },
@@ -36,12 +36,13 @@
     "tmp": "0.0.28"
   },
   "dependencies": {
+    "adm-zip": "^0.4.7",
     "archive-type": "^3.2.0",
     "bluebird": "^3.3.5",
     "lodash": "^4.11.1",
     "lzma-native": "^1.1.0",
     "read-chunk": "^2.0.0",
-    "resin-zip-image": "^1.1.2",
-    "unbzip2-stream": "^1.0.9"
+    "unbzip2-stream": "^1.0.9",
+    "unzip2": "^0.2.5"
   }
 }

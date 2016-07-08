@@ -29,19 +29,19 @@ describe('EtcherImageStream: ZIP', function() {
   describe('given an empty zip directory', function() {
     tester.expectError(
       path.join(ZIP_PATH, 'zip-directory-empty.zip'),
-      'Invalid zip image');
+      'Invalid archive image');
   });
 
   describe('given a zip directory containing only misc files', function() {
     tester.expectError(
       path.join(ZIP_PATH, 'zip-directory-no-image-only-misc.zip'),
-      'Invalid zip image');
+      'Invalid archive image');
   });
 
   describe('given a zip directory containing multiple images', function() {
     tester.expectError(
       path.join(ZIP_PATH, 'zip-directory-multiple-images.zip'),
-      'Invalid zip image');
+      'Invalid archive image');
   });
 
   describe('given a zip directory containing only an image', function() {
