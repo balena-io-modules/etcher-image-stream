@@ -38,9 +38,9 @@ describe('EtcherImageStream: Metadata ZIP', function() {
 
   });
 
-  describe('given an archive with a `manifest.json` containing a name', function() {
+  describe('given an archive with a `manifest.json`', function() {
 
-    const archive = path.join(ZIP_PATH, 'rpi-with-name.zip');
+    const archive = path.join(ZIP_PATH, 'rpi-with-manifest.zip');
 
     tester.extractFromFilePath(
       archive,
@@ -49,6 +49,13 @@ describe('EtcherImageStream: Metadata ZIP', function() {
     it('should read the manifest name property', function(done) {
       imageStream.getFromFilePath(archive).then((image) => {
         m.chai.expect(image.name).to.equal('Raspberry Pi');
+        done();
+      });
+    });
+
+    it('should read the manifest url property', function(done) {
+      imageStream.getFromFilePath(archive).then((image) => {
+        m.chai.expect(image.url).to.equal('https://www.raspberrypi.org');
         done();
       });
     });
