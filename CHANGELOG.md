@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v2.4.0] - 2016-07-11
+
+### Added
+
+- Add support for an `_info/manifest.json` in archive images.
+- Add support for specifying a logo as `_info/logo.svg` in archive images.
+
 ## [v2.3.0] - 2016-07-01
 
 ### Added
@@ -50,6 +57,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Don't ignore `lib/` in NPM package.
 
+[v2.4.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v2.3.0...v2.4.0
 [v2.3.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v2.2.0...v2.3.0
 [v2.2.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v2.1.0...v2.2.0
 [v2.1.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v2.0.0...v2.1.0
