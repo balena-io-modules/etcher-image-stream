@@ -42,6 +42,7 @@
     "lodash": "^4.11.1",
     "lzma-native": "^1.1.0",
     "read-chunk": "^2.0.0",
+    "rindle": "^1.3.0",
     "unbzip2-stream": "^1.0.9",
     "unzip2": "^0.2.5"
   }
