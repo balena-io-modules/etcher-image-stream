@@ -60,4 +60,22 @@ describe('EtcherImageStream: Metadata ZIP', function() {
 
   });
 
+  describe('given an archive with a `logo.svg`', function() {
+
+    const archive = path.join(ZIP_PATH, 'rpi-with-logo.zip');
+
+    it('should read the logo contents', function(done) {
+      imageStream.getFromFilePath(archive).then((image) => {
+        m.chai.expect(image.logo).to.equal([
+          '<svg xmlns="http://www.w3.org/2000/svg">',
+          '  <text>Hello World</text>',
+          '</svg>',
+          ''
+        ].join('\n'));
+        done();
+      });
+    });
+
+  });
+
 });
