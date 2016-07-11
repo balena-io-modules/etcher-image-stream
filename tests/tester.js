@@ -25,22 +25,22 @@ const tmp = require('tmp');
 const rindle = require('rindle');
 const imageStream = require('../lib/index');
 
-function doFilesContainTheSameData(file1, file2) {
+const doFilesContainTheSameData = (file1, file2) => {
   return Bluebird.props({
     file1: fs.readFileAsync(file1),
     file2: fs.readFileAsync(file2)
   }).then(function(data) {
     return _.isEqual(data.file1, data.file2);
   });
-}
+};
 
-function deleteIfExists(file) {
+const deleteIfExists = (file) => {
   return Bluebird.try(function() {
     if (fileExists(file)) {
       return fs.unlinkAsync(file);
     }
   });
-}
+};
 
 exports.expectError = function(file, errorMessage) {
   it('should be rejected with an error', function() {

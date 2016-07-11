@@ -30,8 +30,6 @@ describe('EtcherImageStream: Metadata ZIP', function() {
 
   describe('given an archive with an invalid `manifest.json`', function() {
 
-    const archive = path.join(ZIP_PATH, 'rpi-invalid-manifest.zip');
-
     tester.expectError(
       path.join(ZIP_PATH, 'rpi-invalid-manifest.zip'),
       'Invalid archive manifest.json');
