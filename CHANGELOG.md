@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v2.5.0] - 2016-07-18
+
+### Added
+
+- Implement `.getEstimatedFinalSize()`.
+
 ## [v2.4.0] - 2016-07-11
 
 ### Added
@@ -57,6 +63,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Don't ignore `lib/` in NPM package.
 
+[v2.5.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v2.4.0...v2.5.0
 [v2.4.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v2.3.0...v2.4.0
 [v2.3.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v2.2.0...v2.3.0
 [v2.2.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v2.1.0...v2.2.0
