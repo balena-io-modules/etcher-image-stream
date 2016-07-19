@@ -24,6 +24,7 @@ Documentation
 * [imageStream](#module_imageStream)
     * [.supportedFileTypes](#module_imageStream.supportedFileTypes) : <code>Array.&lt;String&gt;</code>
     * [.getFromFilePath(file)](#module_imageStream.getFromFilePath) ⇒ <code>Promise</code>
+    * [.getEstimatedFinalSize(file)](#module_imageStream.getEstimatedFinalSize) ⇒ <code>Promise</code>
 
 <a name="module_imageStream.supportedFileTypes"></a>
 
@@ -75,6 +76,33 @@ imageStream.getFromFilePath('path/to/rpi.img.xz').then(function(image) {
   image.stream
     .pipe(image.transform)
     .pipe(fs.createWriteStream('/dev/disk2'));
+});
+```
+<a name="module_imageStream.getEstimatedFinalSize"></a>
+
+### imageStream.getEstimatedFinalSize(file) ⇒ <code>Promise</code>
+This function is useful to determine the final size of an image
+after decompression or any other needed transformation.
+
+**NOTE:** This function is known to output incorrect results for
+`bzip2`. For this compression format, this function will simply
+return the size of the compressed file.
+
+**Kind**: static method of <code>[imageStream](#module_imageStream)</code>  
+**Summary**: Get the estimated final size from image  
+**Access:** public  
+**Fulfil**: <code>Number</code> - estimated final size  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| file | <code>String</code> | file path |
+
+**Example**  
+```js
+const imageStream = require('etcher-image-stream');
+
+imageStream.getEstimatedFinalSize('path/to/rpi.img.xz').then(function(estimatedSize) {
+  console.log(`The estimated final size is: ${estimatedSize}`);
 });
 ```
 
