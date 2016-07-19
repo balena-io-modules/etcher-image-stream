@@ -16,20 +16,41 @@
 
 'use strict';
 
+const m = require('mochainon');
+const fs = require('fs');
 const path = require('path');
 const DATA_PATH = path.join(__dirname, 'data');
 const IMAGES_PATH = path.join(DATA_PATH, 'images');
 const XZ_PATH = path.join(DATA_PATH, 'xz');
+const imageStream = require('../lib/index');
 const tester = require('./tester');
 
 describe('EtcherImageStream: XZ', function() {
 
   this.timeout(10000);
 
-  describe('given a xz image', function() {
-    tester.extractFromFilePath(
-      path.join(XZ_PATH, 'raspberrypi.img.xz'),
-      path.join(IMAGES_PATH, 'raspberrypi.img'));
+  describe('.getFromFilePath()', function() {
+
+    describe('given a xz image', function() {
+      tester.extractFromFilePath(
+        path.join(XZ_PATH, 'raspberrypi.img.xz'),
+        path.join(IMAGES_PATH, 'raspberrypi.img'));
+    });
+
+  });
+
+  describe('.getEstimatedFinalSize()', function() {
+
+    it('should return the correct estimated uncompressed size', function(done) {
+      const image = path.join(XZ_PATH, 'raspberrypi.img.xz');
+      const expectedSize = fs.statSync(path.join(IMAGES_PATH, 'raspberrypi.img')).size;
+
+      imageStream.getEstimatedFinalSize(image).then((estimatedSize) => {
+        m.chai.expect(estimatedSize).to.equal(expectedSize);
+        done();
+      });
+    });
+
   });
 
 });

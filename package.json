@@ -38,6 +38,7 @@
     "adm-zip": "^0.4.7",
     "archive-type": "^3.2.0",
     "bluebird": "^3.3.5",
+    "gzip-uncompressed-size": "^1.0.0",
     "lodash": "^4.11.1",
     "lzma-native": "^1.1.0",
     "read-chunk": "^2.0.0",

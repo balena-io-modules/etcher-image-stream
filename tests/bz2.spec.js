@@ -16,20 +16,41 @@
 
 'use strict';
 
+const m = require('mochainon');
+const fs = require('fs');
 const path = require('path');
 const DATA_PATH = path.join(__dirname, 'data');
 const IMAGES_PATH = path.join(DATA_PATH, 'images');
 const BZ2_PATH = path.join(DATA_PATH, 'bz2');
+const imageStream = require('../lib/index');
 const tester = require('./tester');
 
 describe('EtcherImageStream: BZ2', function() {
 
   this.timeout(10000);
 
-  describe('given a bz2 image', function() {
-    tester.extractFromFilePath(
-      path.join(BZ2_PATH, 'raspberrypi.img.bz2'),
-      path.join(IMAGES_PATH, 'raspberrypi.img'));
+  describe('.getFromFilePath()', function() {
+
+    describe('given a bz2 image', function() {
+      tester.extractFromFilePath(
+        path.join(BZ2_PATH, 'raspberrypi.img.bz2'),
+        path.join(IMAGES_PATH, 'raspberrypi.img'));
+    });
+
+  });
+
+  describe('.getEstimatedFinalSize()', function() {
+
+    it('should return the compressed size', function(done) {
+      const image = path.join(BZ2_PATH, 'raspberrypi.img.bz2');
+      const expectedSize = fs.statSync(image).size;
+
+      imageStream.getEstimatedFinalSize(image).then((estimatedSize) => {
+        m.chai.expect(estimatedSize).to.equal(expectedSize);
+        done();
+      });
+    });
+
   });
 
 });

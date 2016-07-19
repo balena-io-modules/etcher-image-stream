@@ -16,19 +16,40 @@
 
 'use strict';
 
+const m = require('mochainon');
+const fs = require('fs');
 const path = require('path');
 const DATA_PATH = path.join(__dirname, 'data');
 const IMAGES_PATH = path.join(DATA_PATH, 'images');
+const imageStream = require('../lib/index');
 const tester = require('./tester');
 
 describe('EtcherImageStream: IMG', function() {
 
   this.timeout(10000);
 
-  describe('given an img image', function() {
-    tester.extractFromFilePath(
-      path.join(IMAGES_PATH, 'raspberrypi.img'),
-      path.join(IMAGES_PATH, 'raspberrypi.img'));
+  describe('.getFromFilePath()', function() {
+
+    describe('given an img image', function() {
+      tester.extractFromFilePath(
+        path.join(IMAGES_PATH, 'raspberrypi.img'),
+        path.join(IMAGES_PATH, 'raspberrypi.img'));
+    });
+
+  });
+
+  describe('.getEstimatedFinalSize()', function() {
+
+    it('should return the file size', function(done) {
+      const image = path.join(IMAGES_PATH, 'raspberrypi.img');
+      const expectedSize = fs.statSync(image).size;
+
+      imageStream.getEstimatedFinalSize(image).then((estimatedSize) => {
+        m.chai.expect(estimatedSize).to.equal(expectedSize);
+        done();
+      });
+    });
+
   });
 
 });

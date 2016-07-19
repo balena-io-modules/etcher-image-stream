@@ -16,44 +16,65 @@
 
 'use strict';
 
+const m = require('mochainon');
+const fs = require('fs');
 const path = require('path');
 const DATA_PATH = path.join(__dirname, 'data');
 const IMAGES_PATH = path.join(DATA_PATH, 'images');
 const ZIP_PATH = path.join(DATA_PATH, 'zip');
+const imageStream = require('../lib/index');
 const tester = require('./tester');
 
 describe('EtcherImageStream: ZIP', function() {
 
   this.timeout(10000);
 
-  describe('given an empty zip directory', function() {
-    tester.expectError(
-      path.join(ZIP_PATH, 'zip-directory-empty.zip'),
-      'Invalid archive image');
+  describe('.getFromFilePath()', function() {
+
+    describe('given an empty zip directory', function() {
+      tester.expectError(
+        path.join(ZIP_PATH, 'zip-directory-empty.zip'),
+        'Invalid archive image');
+    });
+
+    describe('given a zip directory containing only misc files', function() {
+      tester.expectError(
+        path.join(ZIP_PATH, 'zip-directory-no-image-only-misc.zip'),
+        'Invalid archive image');
+    });
+
+    describe('given a zip directory containing multiple images', function() {
+      tester.expectError(
+        path.join(ZIP_PATH, 'zip-directory-multiple-images.zip'),
+        'Invalid archive image');
+    });
+
+    describe('given a zip directory containing only an image', function() {
+      tester.extractFromFilePath(
+        path.join(ZIP_PATH, 'zip-directory-rpi-only.zip'),
+        path.join(IMAGES_PATH, 'raspberrypi.img'));
+    });
+
+    describe('given a zip directory containing an image and other misc files', function() {
+      tester.extractFromFilePath(
+        path.join(ZIP_PATH, 'zip-directory-rpi-and-misc.zip'),
+        path.join(IMAGES_PATH, 'raspberrypi.img'));
+    });
+
   });
 
-  describe('given a zip directory containing only misc files', function() {
-    tester.expectError(
-      path.join(ZIP_PATH, 'zip-directory-no-image-only-misc.zip'),
-      'Invalid archive image');
-  });
+  describe('.getEstimatedFinalSize()', function() {
 
-  describe('given a zip directory containing multiple images', function() {
-    tester.expectError(
-      path.join(ZIP_PATH, 'zip-directory-multiple-images.zip'),
-      'Invalid archive image');
-  });
+    it('should return the correct estimated uncompressed size', function(done) {
+      const image = path.join(ZIP_PATH, 'zip-directory-rpi-only.zip');
+      const expectedSize = fs.statSync(path.join(IMAGES_PATH, 'raspberrypi.img')).size;
 
-  describe('given a zip directory containing only an image', function() {
-    tester.extractFromFilePath(
-      path.join(ZIP_PATH, 'zip-directory-rpi-only.zip'),
-      path.join(IMAGES_PATH, 'raspberrypi.img'));
-  });
+      imageStream.getEstimatedFinalSize(image).then((estimatedSize) => {
+        m.chai.expect(estimatedSize).to.equal(expectedSize);
+        done();
+      });
+    });
 
-  describe('given a zip directory containing an image and other misc files', function() {
-    tester.extractFromFilePath(
-      path.join(ZIP_PATH, 'zip-directory-rpi-and-misc.zip'),
-      path.join(IMAGES_PATH, 'raspberrypi.img'));
   });
 
 });
