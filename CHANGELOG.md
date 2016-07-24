@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v2.6.0] - 2016-07-24
+
+### Added
+
+- Add `raw` support.
+
 ## [v2.5.2] - 2016-07-19
 
 ### Changed
@@ -75,6 +81,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Don't ignore `lib/` in NPM package.
 
+[v2.6.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v2.5.2...v2.6.0
 [v2.5.2]: https://github.com/resin-io-modules/etcher-image-stream/compare/v2.5.1...v2.5.2
 [v2.5.1]: https://github.com/resin-io-modules/etcher-image-stream/compare/v2.5.0...v2.5.1
 [v2.5.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v2.4.0...v2.5.0
