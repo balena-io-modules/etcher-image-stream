@@ -24,7 +24,7 @@ Documentation
 * [imageStream](#module_imageStream)
     * [.supportedFileTypes](#module_imageStream.supportedFileTypes) : <code>Array.&lt;String&gt;</code>
     * [.getFromFilePath(file)](#module_imageStream.getFromFilePath) ⇒ <code>Promise</code>
-    * [.getEstimatedFinalSize(file)](#module_imageStream.getEstimatedFinalSize) ⇒ <code>Promise</code>
+    * [.getImageMetatada(file)](#module_imageStream.getImageMetatada) ⇒ <code>Promise</code>
 
 <a name="module_imageStream.supportedFileTypes"></a>
 
@@ -78,20 +78,21 @@ imageStream.getFromFilePath('path/to/rpi.img.xz').then(function(image) {
     .pipe(fs.createWriteStream('/dev/disk2'));
 });
 ```
-<a name="module_imageStream.getEstimatedFinalSize"></a>
+<a name="module_imageStream.getImageMetatada"></a>
 
-### imageStream.getEstimatedFinalSize(file) ⇒ <code>Promise</code>
+### imageStream.getImageMetatada(file) ⇒ <code>Promise</code>
 This function is useful to determine the final size of an image
-after decompression or any other needed transformation.
+after decompression or any other needed transformation, as well as
+other relevent metadata, if any.
 
-**NOTE:** This function is known to output incorrect results for
+**NOTE:** This function is known to output incorrect size results for
 `bzip2`. For this compression format, this function will simply
 return the size of the compressed file.
 
 **Kind**: static method of <code>[imageStream](#module_imageStream)</code>  
-**Summary**: Get the estimated final size from image  
+**Summary**: Get image metadata  
 **Access:** public  
-**Fulfil**: <code>Number</code> - estimated final size  
+**Fulfil**: <code>Object</code> - image metadata  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -101,8 +102,11 @@ return the size of the compressed file.
 ```js
 const imageStream = require('etcher-image-stream');
 
-imageStream.getEstimatedFinalSize('path/to/rpi.img.xz').then(function(estimatedSize) {
-  console.log(`The estimated final size is: ${estimatedSize}`);
+imageStream.getImageMetatada('path/to/rpi.img.xz').then(function(metadata) {
+  console.log(`The image display name is: ${metada.name}`);
+  console.log(`The image url is: ${metada.url}`);
+  console.log(`The image logo is: ${metada.logo}`);
+  console.log(`The estimated final size is: ${metada.estimatedSize}`);
 });
 ```
 
