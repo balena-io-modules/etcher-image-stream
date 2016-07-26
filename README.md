@@ -24,7 +24,7 @@ Documentation
 * [imageStream](#module_imageStream)
     * [.supportedFileTypes](#module_imageStream.supportedFileTypes) : <code>Array.&lt;String&gt;</code>
     * [.getFromFilePath(file)](#module_imageStream.getFromFilePath) ⇒ <code>Promise</code>
-    * [.getImageMetatada(file)](#module_imageStream.getImageMetatada) ⇒ <code>Promise</code>
+    * [.getImageMetadata(file)](#module_imageStream.getImageMetadata) ⇒ <code>Promise</code>
 
 <a name="module_imageStream.supportedFileTypes"></a>
 
@@ -78,9 +78,9 @@ imageStream.getFromFilePath('path/to/rpi.img.xz').then(function(image) {
     .pipe(fs.createWriteStream('/dev/disk2'));
 });
 ```
-<a name="module_imageStream.getImageMetatada"></a>
+<a name="module_imageStream.getImageMetadata"></a>
 
-### imageStream.getImageMetatada(file) ⇒ <code>Promise</code>
+### imageStream.getImageMetadata(file) ⇒ <code>Promise</code>
 This function is useful to determine the final size of an image
 after decompression or any other needed transformation, as well as
 other relevent metadata, if any.
@@ -102,7 +102,7 @@ return the size of the compressed file.
 ```js
 const imageStream = require('etcher-image-stream');
 
-imageStream.getImageMetatada('path/to/rpi.img.xz').then(function(metadata) {
+imageStream.getImageMetadata('path/to/rpi.img.xz').then(function(metadata) {
   console.log(`The image display name is: ${metada.name}`);
   console.log(`The image url is: ${metada.url}`);
   console.log(`The image logo is: ${metada.logo}`);

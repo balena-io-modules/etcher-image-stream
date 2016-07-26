@@ -34,12 +34,12 @@ describe('EtcherImageStream: Metadata ZIP', function() {
       path.join(ZIP_PATH, 'rpi-invalid-manifest.zip'),
       'Invalid archive manifest.json');
 
-    describe('.getImageMetatada()', function() {
+    describe('.getImageMetadata()', function() {
 
       it('should be rejected with an error', function(done) {
         const image = path.join(ZIP_PATH, 'rpi-invalid-manifest.zip');
 
-        imageStream.getImageMetatada(image).catch((error) => {
+        imageStream.getImageMetadata(image).catch((error) => {
           m.chai.expect(error).to.be.an.instanceof(Error);
           m.chai.expect(error.message).to.equal('Invalid archive manifest.json');
           done();
@@ -72,10 +72,10 @@ describe('EtcherImageStream: Metadata ZIP', function() {
       });
     });
 
-    describe('.getImageMetatada()', function() {
+    describe('.getImageMetadata()', function() {
 
       it('should resolve the correct metadata', function(done) {
-        imageStream.getImageMetatada(archive).then((metadata) => {
+        imageStream.getImageMetadata(archive).then((metadata) => {
           m.chai.expect(metadata.name).to.equal('Raspberry Pi');
           m.chai.expect(metadata.url).to.equal('https://www.raspberrypi.org');
           done();
@@ -104,10 +104,10 @@ describe('EtcherImageStream: Metadata ZIP', function() {
       });
     });
 
-    describe('.getImageMetatada()', function() {
+    describe('.getImageMetadata()', function() {
 
       it('should include the logo in the', function(done) {
-        imageStream.getImageMetatada(archive).then((metadata) => {
+        imageStream.getImageMetadata(archive).then((metadata) => {
           m.chai.expect(metadata.logo).to.equal(logo);
           done();
         });
