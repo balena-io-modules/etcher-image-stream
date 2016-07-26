@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v3.0.1] - 2016-07-25
+
+### Changed
+
+- Rename `.getImageMetatada()` to `.getImageMetadata()` (typo).
+
 ## [v3.0.0] - 2016-07-25
 
 ### Added
@@ -97,6 +103,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Don't ignore `lib/` in NPM package.
 
+[v3.0.1]: https://github.com/resin-io-modules/etcher-image-stream/compare/v3.0.0...v3.0.1
 [v3.0.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v2.6.1...v3.0.0
 [v2.6.1]: https://github.com/resin-io-modules/etcher-image-stream/compare/v2.6.0...v2.6.1
 [v2.6.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v2.5.2...v2.6.0
