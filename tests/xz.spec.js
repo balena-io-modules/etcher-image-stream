@@ -39,13 +39,13 @@ describe('EtcherImageStream: XZ', function() {
 
   });
 
-  describe('.getImageMetatada()', function() {
+  describe('.getImageMetadata()', function() {
 
     it('should return the correct metadata', function(done) {
       const image = path.join(XZ_PATH, 'raspberrypi.img.xz');
       const expectedSize = fs.statSync(path.join(IMAGES_PATH, 'raspberrypi.img')).size;
 
-      imageStream.getImageMetatada(image).then((metadata) => {
+      imageStream.getImageMetadata(image).then((metadata) => {
         m.chai.expect(metadata).to.deep.equal({
           estimatedSize: expectedSize
         });

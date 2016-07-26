@@ -63,13 +63,13 @@ describe('EtcherImageStream: ZIP', function() {
 
   });
 
-  describe('.getImageMetatada()', function() {
+  describe('.getImageMetadata()', function() {
 
     it('should return the correct metadata', function(done) {
       const image = path.join(ZIP_PATH, 'zip-directory-rpi-only.zip');
       const expectedSize = fs.statSync(path.join(IMAGES_PATH, 'raspberrypi.img')).size;
 
-      imageStream.getImageMetatada(image).then((metadata) => {
+      imageStream.getImageMetadata(image).then((metadata) => {
         m.chai.expect(metadata).to.deep.equal({
           estimatedSize: expectedSize
         });
