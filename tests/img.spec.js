@@ -38,14 +38,16 @@ describe('EtcherImageStream: IMG', function() {
 
   });
 
-  describe('.getEstimatedFinalSize()', function() {
+  describe('.getImageMetatada()', function() {
 
-    it('should return the file size', function(done) {
+    it('should return the correct metadata', function(done) {
       const image = path.join(IMAGES_PATH, 'raspberrypi.img');
       const expectedSize = fs.statSync(image).size;
 
-      imageStream.getEstimatedFinalSize(image).then((estimatedSize) => {
-        m.chai.expect(estimatedSize).to.equal(expectedSize);
+      imageStream.getImageMetatada(image).then((metadata) => {
+        m.chai.expect(metadata).to.deep.equal({
+          estimatedSize: expectedSize
+        });
         done();
       });
     });

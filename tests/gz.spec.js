@@ -39,14 +39,16 @@ describe('EtcherImageStream: GZ', function() {
 
   });
 
-  describe('.getEstimatedFinalSize()', function() {
+  describe('.getImageMetatada()', function() {
 
-    it('should return the correct estimated uncompressed size', function(done) {
+    it('should return the correct metadata', function(done) {
       const image = path.join(GZ_PATH, 'raspberrypi.img.gz');
       const expectedSize = fs.statSync(path.join(IMAGES_PATH, 'raspberrypi.img')).size;
 
-      imageStream.getEstimatedFinalSize(image).then((estimatedSize) => {
-        m.chai.expect(estimatedSize).to.equal(expectedSize);
+      imageStream.getImageMetatada(image).then((metadata) => {
+        m.chai.expect(metadata).to.deep.equal({
+          estimatedSize: expectedSize
+        });
         done();
       });
     });

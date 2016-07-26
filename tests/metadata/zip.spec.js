@@ -34,6 +34,20 @@ describe('EtcherImageStream: Metadata ZIP', function() {
       path.join(ZIP_PATH, 'rpi-invalid-manifest.zip'),
       'Invalid archive manifest.json');
 
+    describe('.getImageMetatada()', function() {
+
+      it('should be rejected with an error', function(done) {
+        const image = path.join(ZIP_PATH, 'rpi-invalid-manifest.zip');
+
+        imageStream.getImageMetatada(image).catch((error) => {
+          m.chai.expect(error).to.be.an.instanceof(Error);
+          m.chai.expect(error.message).to.equal('Invalid archive manifest.json');
+          done();
+        });
+      });
+
+    });
+
   });
 
   describe('given an archive with a `manifest.json`', function() {
@@ -58,22 +72,47 @@ describe('EtcherImageStream: Metadata ZIP', function() {
       });
     });
 
+    describe('.getImageMetatada()', function() {
+
+      it('should resolve the correct metadata', function(done) {
+        imageStream.getImageMetatada(archive).then((metadata) => {
+          m.chai.expect(metadata.name).to.equal('Raspberry Pi');
+          m.chai.expect(metadata.url).to.equal('https://www.raspberrypi.org');
+          done();
+        });
+      });
+
+    });
+
   });
 
   describe('given an archive with a `logo.svg`', function() {
 
     const archive = path.join(ZIP_PATH, 'rpi-with-logo.zip');
 
+    const logo = [
+      '<svg xmlns="http://www.w3.org/2000/svg">',
+      '  <text>Hello World</text>',
+      '</svg>',
+      ''
+    ].join('\n');
+
     it('should read the logo contents', function(done) {
       imageStream.getFromFilePath(archive).then((image) => {
-        m.chai.expect(image.logo).to.equal([
-          '<svg xmlns="http://www.w3.org/2000/svg">',
-          '  <text>Hello World</text>',
-          '</svg>',
-          ''
-        ].join('\n'));
+        m.chai.expect(image.logo).to.equal(logo);
         done();
       });
+    });
+
+    describe('.getImageMetatada()', function() {
+
+      it('should include the logo in the', function(done) {
+        imageStream.getImageMetatada(archive).then((metadata) => {
+          m.chai.expect(metadata.logo).to.equal(logo);
+          done();
+        });
+      });
+
     });
 
   });
