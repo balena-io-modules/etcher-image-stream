@@ -106,9 +106,49 @@ describe('EtcherImageStream: Metadata ZIP', function() {
 
     describe('.getImageMetadata()', function() {
 
-      it('should include the logo in the', function(done) {
+      it('should include the logo in the image metadata', function(done) {
         imageStream.getImageMetadata(archive).then((metadata) => {
           m.chai.expect(metadata.logo).to.equal(logo);
+          done();
+        });
+      });
+
+    });
+
+  });
+
+  describe('given an archive with a bmap file', function() {
+
+    const archive = path.join(ZIP_PATH, 'rpi-with-bmap.zip');
+
+    const bmap = [
+      '<?xml version="1.0" ?>',
+      '<bmap version="1.3">',
+      '    <ImageSize> 36864 </ImageSize>',
+      '    <BlockSize> 4096 </BlockSize>',
+      '    <BlocksCount> 9 </BlocksCount>',
+      '    <MappedBlocksCount> 4     </MappedBlocksCount>',
+      '    <BmapFileSHA1> d90f372215cbbef8801caca7b1dd7e587b2142cc </BmapFileSHA1>',
+      '    <BlockMap>',
+      '        <Range sha1="193edb53bde599f58369f4e83a6c5d54b96819ce"> 0-1 </Range>',
+      '        <Range sha1="193edb53bde599f58369f4e83a6c5d54b96819ce"> 7-8 </Range>',
+      '    </BlockMap>',
+      '</bmap>',
+      ''
+    ].join('\n');
+
+    it('should read the bmap contents', function(done) {
+      imageStream.getFromFilePath(archive).then((image) => {
+        m.chai.expect(image.bmap).to.equal(bmap);
+        done();
+      });
+    });
+
+    describe('.getImageMetadata()', function() {
+
+      it('should include the logo in the image metadata', function(done) {
+        imageStream.getImageMetadata(archive).then((metadata) => {
+          m.chai.expect(metadata.bmap).to.equal(bmap);
           done();
         });
       });
