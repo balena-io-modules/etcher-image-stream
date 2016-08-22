@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v3.1.1] - 2016-08-22
+
+### Changed
+
+- Improve speed when retrieving archive metadata.
+
 ## [v3.1.0] - 2016-08-15
 
 ### Added
@@ -109,6 +115,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Don't ignore `lib/` in NPM package.
 
+[v3.1.1]: https://github.com/resin-io-modules/etcher-image-stream/compare/v3.1.0...v3.1.1
 [v3.1.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v3.0.1...v3.1.0
 [v3.0.1]: https://github.com/resin-io-modules/etcher-image-stream/compare/v3.0.0...v3.0.1
 [v3.0.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v2.6.1...v3.0.0
