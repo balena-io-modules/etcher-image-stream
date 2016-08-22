@@ -91,11 +91,12 @@ describe('Archive hooks: ZIP', function() {
 
     beforeEach(function() {
       this.zip = path.join(ZIP_PATH, 'zip-directory-nested-misc.zip');
+      this.entries = zipHooks.getEntries(this.zip);
     });
 
     it('should be able to extract a top-level file', function(done) {
       const fileName = 'zip-directory-nested-misc/foo';
-      zipHooks.extractFile(this.zip, fileName).then((stream) => {
+      zipHooks.extractFile(this.zip, this.entries, fileName).then((stream) => {
         rindle.extract(stream, function(error, data) {
           m.chai.expect(error).to.not.exist;
           m.chai.expect(data).to.equal('foo\n');
@@ -106,7 +107,7 @@ describe('Archive hooks: ZIP', function() {
 
     it('should be able to extract a nested file', function(done) {
       const fileName = 'zip-directory-nested-misc/hello/there/bar';
-      zipHooks.extractFile(this.zip, fileName).then((stream) => {
+      zipHooks.extractFile(this.zip, this.entries, fileName).then((stream) => {
         rindle.extract(stream, function(error, data) {
           m.chai.expect(error).to.not.exist;
           m.chai.expect(data).to.equal('bar\n');
@@ -117,7 +118,7 @@ describe('Archive hooks: ZIP', function() {
 
     it('should throw if the entry does not exist', function(done) {
       const fileName = 'zip-directory-nested-misc/xxxxxxxxxxxxxxxx';
-      zipHooks.extractFile(this.zip, fileName).catch((error) => {
+      zipHooks.extractFile(this.zip, this.entries, fileName).catch((error) => {
         m.chai.expect(error).to.be.an.instanceof(Error);
         m.chai.expect(error.message).to.equal(`Invalid entry: ${fileName}`);
         done();
@@ -126,7 +127,7 @@ describe('Archive hooks: ZIP', function() {
 
     it('should throw if the entry is a directory', function(done) {
       const fileName = 'zip-directory-nested-misc/hello';
-      zipHooks.extractFile(this.zip, fileName).catch((error) => {
+      zipHooks.extractFile(this.zip, this.entries, fileName).catch((error) => {
         m.chai.expect(error).to.be.an.instanceof(Error);
         m.chai.expect(error.message).to.equal(`Invalid entry: ${fileName}`);
         done();
