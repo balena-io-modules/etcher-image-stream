@@ -32,9 +32,10 @@ describe('Archive hooks: ZIP', function() {
         this.zip = path.join(ZIP_PATH, 'zip-directory-empty.zip');
       });
 
-      it('should return an empty array', function() {
-        const entries = zipHooks.getEntries(this.zip);
-        m.chai.expect(entries).to.deep.equal([]);
+      it('should become an empty array', function(done) {
+        zipHooks.getEntries(this.zip).then((entries) => {
+          m.chai.expect(entries).to.deep.equal([]);
+        }).asCallback(done);
       });
 
     });
@@ -45,19 +46,19 @@ describe('Archive hooks: ZIP', function() {
         this.zip = path.join(ZIP_PATH, 'zip-directory-multiple-images.zip');
       });
 
-      it('should return all entries', function() {
-        const entries = zipHooks.getEntries(this.zip);
-
-        m.chai.expect(entries).to.deep.equal([
-          {
-            name: 'multiple-images/edison-config.img',
-            size: 16777216
-          },
-          {
-            name: 'multiple-images/raspberrypi.img',
-            size: 33554432
-          }
-        ]);
+      it('should become all entries', function(done) {
+        zipHooks.getEntries(this.zip).then((entries) => {
+          m.chai.expect(entries).to.deep.equal([
+            {
+              name: 'multiple-images/edison-config.img',
+              size: 16777216
+            },
+            {
+              name: 'multiple-images/raspberrypi.img',
+              size: 33554432
+            }
+          ]);
+        }).asCallback(done);
       });
 
     });
@@ -68,19 +69,19 @@ describe('Archive hooks: ZIP', function() {
         this.zip = path.join(ZIP_PATH, 'zip-directory-nested-misc.zip');
       });
 
-      it('should return all entries', function() {
-        const entries = zipHooks.getEntries(this.zip);
-
-        m.chai.expect(entries).to.deep.equal([
-          {
-            name: 'zip-directory-nested-misc/foo',
-            size: 4
-          },
-          {
-            name: 'zip-directory-nested-misc/hello/there/bar',
-            size: 4
-          }
-        ]);
+      it('should become all entries', function(done) {
+        zipHooks.getEntries(this.zip).then((entries) => {
+          m.chai.expect(entries).to.deep.equal([
+            {
+              name: 'zip-directory-nested-misc/foo',
+              size: 4
+            },
+            {
+              name: 'zip-directory-nested-misc/hello/there/bar',
+              size: 4
+            }
+          ]);
+        }).asCallback(done);
       });
 
     });
@@ -91,12 +92,13 @@ describe('Archive hooks: ZIP', function() {
 
     beforeEach(function() {
       this.zip = path.join(ZIP_PATH, 'zip-directory-nested-misc.zip');
-      this.entries = zipHooks.getEntries(this.zip);
     });
 
     it('should be able to extract a top-level file', function(done) {
       const fileName = 'zip-directory-nested-misc/foo';
-      zipHooks.extractFile(this.zip, this.entries, fileName).then((stream) => {
+      zipHooks.getEntries(this.zip).then((entries) => {
+        return zipHooks.extractFile(this.zip, entries, fileName);
+      }).then((stream) => {
         rindle.extract(stream, function(error, data) {
           m.chai.expect(error).to.not.exist;
           m.chai.expect(data).to.equal('foo\n');
@@ -107,7 +109,9 @@ describe('Archive hooks: ZIP', function() {
 
     it('should be able to extract a nested file', function(done) {
       const fileName = 'zip-directory-nested-misc/hello/there/bar';
-      zipHooks.extractFile(this.zip, this.entries, fileName).then((stream) => {
+      zipHooks.getEntries(this.zip).then((entries) => {
+        return zipHooks.extractFile(this.zip, entries, fileName);
+      }).then((stream) => {
         rindle.extract(stream, function(error, data) {
           m.chai.expect(error).to.not.exist;
           m.chai.expect(data).to.equal('bar\n');
@@ -118,7 +122,9 @@ describe('Archive hooks: ZIP', function() {
 
     it('should throw if the entry does not exist', function(done) {
       const fileName = 'zip-directory-nested-misc/xxxxxxxxxxxxxxxx';
-      zipHooks.extractFile(this.zip, this.entries, fileName).catch((error) => {
+      zipHooks.getEntries(this.zip).then((entries) => {
+        return zipHooks.extractFile(this.zip, entries, fileName);
+      }).catch((error) => {
         m.chai.expect(error).to.be.an.instanceof(Error);
         m.chai.expect(error.message).to.equal(`Invalid entry: ${fileName}`);
         done();
@@ -127,7 +133,9 @@ describe('Archive hooks: ZIP', function() {
 
     it('should throw if the entry is a directory', function(done) {
       const fileName = 'zip-directory-nested-misc/hello';
-      zipHooks.extractFile(this.zip, this.entries, fileName).catch((error) => {
+      zipHooks.getEntries(this.zip).then((entries) => {
+        return zipHooks.extractFile(this.zip, entries, fileName);
+      }).catch((error) => {
         m.chai.expect(error).to.be.an.instanceof(Error);
         m.chai.expect(error.message).to.equal(`Invalid entry: ${fileName}`);
         done();
