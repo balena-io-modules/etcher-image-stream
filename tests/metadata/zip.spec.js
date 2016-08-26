@@ -86,6 +86,13 @@ describe('EtcherImageStream: Metadata ZIP', function() {
       });
     });
 
+    it('should read the manifest releaseNotesUrl property', function(done) {
+      imageStream.getFromFilePath(archive).then((image) => {
+        m.chai.expect(image.releaseNotesUrl).to.equal('http://downloads.raspberrypi.org/raspbian/release_notes.txt');
+        done();
+      });
+    });
+
     describe('.getImageMetadata()', function() {
 
       it('should resolve the correct metadata', function(done) {
@@ -94,6 +101,7 @@ describe('EtcherImageStream: Metadata ZIP', function() {
           m.chai.expect(metadata.version).to.equal('1.0.0');
           m.chai.expect(metadata.url).to.equal('https://www.raspberrypi.org');
           m.chai.expect(metadata.supportUrl).to.equal('https://www.raspberrypi.org/forums/');
+          m.chai.expect(metadata.releaseNotesUrl).to.equal('http://downloads.raspberrypi.org/raspbian/release_notes.txt');
           done();
         });
       });
