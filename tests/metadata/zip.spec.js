@@ -65,6 +65,13 @@ describe('EtcherImageStream: Metadata ZIP', function() {
       });
     });
 
+    it('should read the manifest version property', function(done) {
+      imageStream.getFromFilePath(archive).then((image) => {
+        m.chai.expect(image.version).to.equal('1.0.0');
+        done();
+      });
+    });
+
     it('should read the manifest url property', function(done) {
       imageStream.getFromFilePath(archive).then((image) => {
         m.chai.expect(image.url).to.equal('https://www.raspberrypi.org');
@@ -84,6 +91,7 @@ describe('EtcherImageStream: Metadata ZIP', function() {
       it('should resolve the correct metadata', function(done) {
         imageStream.getImageMetadata(archive).then((metadata) => {
           m.chai.expect(metadata.name).to.equal('Raspberry Pi');
+          m.chai.expect(metadata.version).to.equal('1.0.0');
           m.chai.expect(metadata.url).to.equal('https://www.raspberrypi.org');
           m.chai.expect(metadata.supportUrl).to.equal('https://www.raspberrypi.org/forums/');
           done();
