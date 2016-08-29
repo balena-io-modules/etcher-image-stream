@@ -24,6 +24,16 @@ const ZIP_PATH = path.join(DATA_PATH, 'metadata', 'zip');
 const tester = require('../tester');
 const imageStream = require('../../lib');
 
+const testMetadataProperty = (archivePath, propertyName, expectedValue) => {
+  return imageStream.getFromFilePath(archivePath).then((image) => {
+    m.chai.expect(image[propertyName]).to.deep.equal(expectedValue);
+
+    return imageStream.getImageMetadata(archivePath).then((metadata) => {
+      m.chai.expect(metadata[propertyName]).to.deep.equal(expectedValue);
+    });
+  });
+};
+
 describe('EtcherImageStream: Metadata ZIP', function() {
 
   this.timeout(10000);
@@ -59,53 +69,25 @@ describe('EtcherImageStream: Metadata ZIP', function() {
       path.join(IMAGES_PATH, 'raspberrypi.img'));
 
     it('should read the manifest name property', function(done) {
-      imageStream.getFromFilePath(archive).then((image) => {
-        m.chai.expect(image.name).to.equal('Raspberry Pi');
-        done();
-      });
+      testMetadataProperty(archive, 'name', 'Raspberry Pi').asCallback(done);
     });
 
     it('should read the manifest version property', function(done) {
-      imageStream.getFromFilePath(archive).then((image) => {
-        m.chai.expect(image.version).to.equal('1.0.0');
-        done();
-      });
+      testMetadataProperty(archive, 'version', '1.0.0').asCallback(done);
     });
 
     it('should read the manifest url property', function(done) {
-      imageStream.getFromFilePath(archive).then((image) => {
-        m.chai.expect(image.url).to.equal('https://www.raspberrypi.org');
-        done();
-      });
+      testMetadataProperty(archive, 'url', 'https://www.raspberrypi.org').asCallback(done);
     });
 
     it('should read the manifest supportUrl property', function(done) {
-      imageStream.getFromFilePath(archive).then((image) => {
-        m.chai.expect(image.supportUrl).to.equal('https://www.raspberrypi.org/forums/');
-        done();
-      });
+      const expectedValue = 'https://www.raspberrypi.org/forums/';
+      testMetadataProperty(archive, 'supportUrl', expectedValue).asCallback(done);
     });
 
     it('should read the manifest releaseNotesUrl property', function(done) {
-      imageStream.getFromFilePath(archive).then((image) => {
-        m.chai.expect(image.releaseNotesUrl).to.equal('http://downloads.raspberrypi.org/raspbian/release_notes.txt');
-        done();
-      });
-    });
-
-    describe('.getImageMetadata()', function() {
-
-      it('should resolve the correct metadata', function(done) {
-        imageStream.getImageMetadata(archive).then((metadata) => {
-          m.chai.expect(metadata.name).to.equal('Raspberry Pi');
-          m.chai.expect(metadata.version).to.equal('1.0.0');
-          m.chai.expect(metadata.url).to.equal('https://www.raspberrypi.org');
-          m.chai.expect(metadata.supportUrl).to.equal('https://www.raspberrypi.org/forums/');
-          m.chai.expect(metadata.releaseNotesUrl).to.equal('http://downloads.raspberrypi.org/raspbian/release_notes.txt');
-          done();
-        });
-      });
-
+      const expectedValue = 'http://downloads.raspberrypi.org/raspbian/release_notes.txt';
+      testMetadataProperty(archive, 'releaseNotesUrl', expectedValue).asCallback(done);
     });
 
   });
@@ -122,21 +104,7 @@ describe('EtcherImageStream: Metadata ZIP', function() {
     ].join('\n');
 
     it('should read the logo contents', function(done) {
-      imageStream.getFromFilePath(archive).then((image) => {
-        m.chai.expect(image.logo).to.equal(logo);
-        done();
-      });
-    });
-
-    describe('.getImageMetadata()', function() {
-
-      it('should include the logo in the image metadata', function(done) {
-        imageStream.getImageMetadata(archive).then((metadata) => {
-          m.chai.expect(metadata.logo).to.equal(logo);
-          done();
-        });
-      });
-
+      testMetadataProperty(archive, 'logo', logo).asCallback(done);
     });
 
   });
@@ -162,21 +130,7 @@ describe('EtcherImageStream: Metadata ZIP', function() {
     ].join('\n');
 
     it('should read the bmap contents', function(done) {
-      imageStream.getFromFilePath(archive).then((image) => {
-        m.chai.expect(image.bmap).to.equal(bmap);
-        done();
-      });
-    });
-
-    describe('.getImageMetadata()', function() {
-
-      it('should include the logo in the image metadata', function(done) {
-        imageStream.getImageMetadata(archive).then((metadata) => {
-          m.chai.expect(metadata.bmap).to.equal(bmap);
-          done();
-        });
-      });
-
+      testMetadataProperty(archive, 'bmap', bmap).asCallback(done);
     });
 
   });
