@@ -46,7 +46,7 @@ describe('EtcherImageStream: IMG', function() {
 
       imageStream.getImageMetadata(image).then((metadata) => {
         m.chai.expect(metadata).to.deep.equal({
-          estimatedSize: expectedSize
+          size: expectedSize
         });
         done();
       });
