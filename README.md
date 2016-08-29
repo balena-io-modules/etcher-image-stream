@@ -107,7 +107,6 @@ imageStream.getImageMetadata('path/to/rpi.img.xz').then(function(metadata) {
   console.log(`The image url is: ${metada.url}`);
   console.log(`The image support url is: ${metada.supportUrl}`);
   console.log(`The image logo is: ${metada.logo}`);
-  console.log(`The estimated final size is: ${metada.estimatedSize}`);
 });
 ```
 

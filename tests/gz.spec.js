@@ -44,10 +44,12 @@ describe('EtcherImageStream: GZ', function() {
     it('should return the correct metadata', function(done) {
       const image = path.join(GZ_PATH, 'raspberrypi.img.gz');
       const expectedSize = fs.statSync(path.join(IMAGES_PATH, 'raspberrypi.img')).size;
+      const size = fs.statSync(path.join(GZ_PATH, 'raspberrypi.img.gz')).size;
 
       imageStream.getImageMetadata(image).then((metadata) => {
         m.chai.expect(metadata).to.deep.equal({
-          estimatedSize: expectedSize
+          estimatedUncompressedSize: expectedSize,
+          size: size
         });
         done();
       });
