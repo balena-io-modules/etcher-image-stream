@@ -90,6 +90,14 @@ describe('EtcherImageStream: Metadata ZIP', function() {
       testMetadataProperty(archive, 'releaseNotesUrl', expectedValue).asCallback(done);
     });
 
+    it('should read the manifest checksumType property', function(done) {
+      testMetadataProperty(archive, 'checksumType', 'md5').asCallback(done);
+    });
+
+    it('should read the manifest checksum property', function(done) {
+      testMetadataProperty(archive, 'checksum', 'add060b285d512f56c175b76b7ef1bee').asCallback(done);
+    });
+
   });
 
   describe('given an archive with a `logo.svg`', function() {
