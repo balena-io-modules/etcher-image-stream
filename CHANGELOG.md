@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v4.0.0] - 2016-09-02
+
+### Added
+
+- Add `supportUrl` property in `_info/manifest.json`.
+- Add `releaseNotesUrl` property in `_info/manifest.json`.
+- Add `version` property in `_info/manifest.json`.
+- Add `checksum` and `checksumType` properties in `_info/manifest.json`.
+
+### Removed
+
+- Remove `estimatedSize` property from `.getImageMetatada()` results.
+
 ## [v3.1.2] - 2016-08-24
 
 ### Changed
@@ -121,6 +134,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Don't ignore `lib/` in NPM package.
 
+[v4.0.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v3.1.2...v4.0.0
 [v3.1.2]: https://github.com/resin-io-modules/etcher-image-stream/compare/v3.1.1...v3.1.2
 [v3.1.1]: https://github.com/resin-io-modules/etcher-image-stream/compare/v3.1.0...v3.1.1
 [v3.1.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v3.0.1...v3.1.0
