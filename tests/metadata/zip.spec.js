@@ -98,6 +98,10 @@ describe('EtcherImageStream: Metadata ZIP', function() {
       testMetadataProperty(archive, 'checksum', 'add060b285d512f56c175b76b7ef1bee').asCallback(done);
     });
 
+    it('should read the manifest bytesToZeroOutFromTheBeginning property', function(done) {
+      testMetadataProperty(archive, 'bytesToZeroOutFromTheBeginning', 512).asCallback(done);
+    });
+
   });
 
   describe('given an archive with a `logo.svg`', function() {
