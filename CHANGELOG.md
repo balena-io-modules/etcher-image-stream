@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v4.1.0] - 2016-09-07
+
+### Added
+
+- Add `bytesToZeroOutFromTheBeginning` property in `_info/manifest.json`.
+
 ## [v4.0.0] - 2016-09-02
 
 ### Added
@@ -134,6 +140,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Don't ignore `lib/` in NPM package.
 
+[v4.1.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v4.0.0...v4.1.0
 [v4.0.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v3.1.2...v4.0.0
 [v3.1.2]: https://github.com/resin-io-modules/etcher-image-stream/compare/v3.1.1...v3.1.2
 [v3.1.1]: https://github.com/resin-io-modules/etcher-image-stream/compare/v3.1.0...v3.1.1

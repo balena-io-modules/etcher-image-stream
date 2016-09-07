@@ -1,6 +1,6 @@
 {
   "name": "etcher-image-stream",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Get a readable stream from any type of OS image",
   "main": "lib/index.js",
   "homepage": "https://github.com/resin-io-modules/etcher-image-stream",
