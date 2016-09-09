@@ -147,4 +147,21 @@ describe('EtcherImageStream: Metadata ZIP', function() {
 
   });
 
+  describe('given an archive with instructions', function() {
+
+    const archive = path.join(ZIP_PATH, 'rpi-with-instructions.zip');
+
+    const instructions = [
+      '# Raspberry Pi Next Steps',
+      '',
+      'Lorem ipsum dolor sit amet.',
+      ''
+    ].join('\n');
+
+    it('should read the instruction contents', function(done) {
+      testMetadataProperty(archive, 'instructions', instructions).asCallback(done);
+    });
+
+  });
+
 });
