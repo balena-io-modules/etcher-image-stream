@@ -102,6 +102,10 @@ describe('EtcherImageStream: Metadata ZIP', function() {
       testMetadataProperty(archive, 'bytesToZeroOutFromTheBeginning', 512).asCallback(done);
     });
 
+    it('should read the manifest recommendedDriveSize property', function(done) {
+      testMetadataProperty(archive, 'recommendedDriveSize', 4294967296).asCallback(done);
+    });
+
   });
 
   describe('given an archive with a `logo.svg`', function() {
