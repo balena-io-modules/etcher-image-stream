@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v4.3.0] - 2016-09-12
+
+### Added
+
+- Add `recommendedDriveSize` property in `_info/manifest.json`.
+
+### Changed
+
+- Upgrade `unbzip2-stream` to v1.0.10, which fixes a known uncaught exception when decompressing large `.bz2` files.
+
 ## [v4.2.0] - 2016-09-09
 
 ### Added
@@ -146,6 +156,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Don't ignore `lib/` in NPM package.
 
+[v4.3.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v4.2.0...v4.3.0
 [v4.2.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v4.1.0...v4.2.0
 [v4.1.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v4.0.0...v4.1.0
 [v4.0.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v3.1.2...v4.0.0
