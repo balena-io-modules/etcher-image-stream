@@ -43,9 +43,14 @@ const deleteIfExists = (file) => {
 };
 
 exports.expectError = function(file, errorMessage) {
-  it('should be rejected with an error', function() {
-    const promise = imageStream.getFromFilePath(file);
-    m.chai.expect(promise).to.be.rejectedWith(errorMessage);
+  it('should be rejected with an error', function(done) {
+    return imageStream.getFromFilePath(file).catch((error) => {
+      m.chai.expect(error).to.be.an.instanceof(Error);
+      m.chai.expect(error.message).to.equal(errorMessage);
+      m.chai.expect(error.description).to.be.a.string;
+      m.chai.expect(error.description.length > 0).to.be.true;
+      done();
+    });
   });
 };
 
