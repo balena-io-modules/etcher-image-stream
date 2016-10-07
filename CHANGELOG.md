@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [v5.1.0] - 2016-10-06
+
+### Added
+
+- Add `etch` support.
+- Add a `.description` property to all archive related errors.
+
 ## [v5.0.0] - 2016-09-14
 
 ### Changed
@@ -162,6 +169,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 - Don't ignore `lib/` in NPM package.
 
+[v5.1.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v5.0.0...v5.1.0
 [v5.0.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v4.3.0...v5.0.0
 [v4.3.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v4.2.0...v4.3.0
 [v4.2.0]: https://github.com/resin-io-modules/etcher-image-stream/compare/v4.1.0...v4.2.0
