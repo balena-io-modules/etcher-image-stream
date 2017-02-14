@@ -1,6 +1,8 @@
 etcher-image-stream
 ===================
 
+**THIS MODULE IS UNMAINTAINED**: This functionality was moved to the main Etcher repository
+
 > Get a readable stream from any type of OS image
 
 [![npm version](https://badge.fury.io/js/etcher-image-stream.svg)](http://badge.fury.io/js/etcher-image-stream)
